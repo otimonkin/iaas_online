@@ -1,0 +1,26 @@
+{% extends "dictionary/base.html" %}
+
+{% block title %}
+Создать статью
+{% endblock %}
+
+{% block content %}
+    <h1>Создать статью</h1>
+    <form method="post">
+        {% csrf_token %}
+        {{ form.title }}<br>
+        {{ form.message }}<br>
+<!--        {{ form.keywords }}<br>-->
+<!--        {{ form.grammar }}-->
+        {{ form.url }}
+<!--      <input type="text" placeholder="Введите название" class="form-control"><br>-->
+<!--      <textarea name="message" placeholder="Введите описание" class="form-control"></textarea><br>-->
+<!--        <textarea name="keywords" placeholder="Введите ключевые слова" id="keywords" class="form-control"></textarea><br>-->
+<!--        <input type="text" placeholder="Придумайте url" class="form-control" id="name" maxlength="32">-->
+      <button type="submit" class="btn btn-success mt-3">Добавить</button>
+        <span>{{ error }}</span>
+    </form>
+
+
+{% endblock %}
+

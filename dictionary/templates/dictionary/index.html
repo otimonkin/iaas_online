@@ -1,0 +1,17 @@
+{% extends "dictionary/base.html" %}
+
+{% block title %}
+{{ title }}
+{% endblock %}
+
+{% block content %}
+    <h1>Главная страница</h1>
+    {% for article in articles %}
+    <div class="alert alert-warning mt-2">
+        <h3>{{ article.title }}</h3>
+
+
+    </div>
+    {% endfor %}
+
+{% endblock %}
