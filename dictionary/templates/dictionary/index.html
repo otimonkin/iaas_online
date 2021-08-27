@@ -7,14 +7,16 @@
 {% block content %}
     <h1>Главная страница</h1>
     {% for article in articles %}
-    <div class="alert alert-info bg-light text-dark border mt-2" role="alert">
-        <a href="{{ article.get_absolute_url }}">
-            <h3>{{ article.title }}</h3>
+
+        <a href="{{ article.get_absolute_url }}" class="text-decoration-none text-reset">
+            <div class="alert alert-info bg-light text-dark border mt-2" role="alert">
+                <h3>{{ article.title }}</h3>
+            </div>
         </a>
 
 
 
-    </div>
+
     {% endfor %}
 
 {% endblock %}

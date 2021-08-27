@@ -11,6 +11,10 @@ def index(request):
     articles = Article.objects.all()
     return render(request, "dictionary/index.html", {'title': 'Главная страница сайта', 'articles': articles})
 
+def search(request):
+    articles = Article.objects.filter(keywords__name='要')
+    return render(request, "dictionary/search.html", {'title': 'Результаты поиска', 'articles': articles})
+
 
 def about(request):
     return render(request, "dictionary/about.html")
@@ -54,10 +58,15 @@ class ArticleDetailView(DetailView):
     #         "article": article
     #     })
 
-# class AuthorDetailView(View):
-#     """Полный текст и описание статьи"""
+
+class AuthorDetailView(DetailView):
+    """Полный текст и описание статьи"""
+    model = User
+    slug_field = "username"
+    template_name = "dictionary/author.html"
 #     def get(self, request, slug):
 #         author = User.objects.get(url=slug)
 #         return render(request, "dictionary/author_detail.html", {
 #             "author": author
 #         })
+
