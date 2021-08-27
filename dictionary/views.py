@@ -1,4 +1,6 @@
 from django.shortcuts import render, redirect
+from django.views.generic import DetailView
+
 from .models import Article, User
 from .forms import ArticleForm
 from django.http import HttpResponse
@@ -42,13 +44,15 @@ def authorview(request):
     })
 
 
-class ArticleDetailView(View):
+class ArticleDetailView(DetailView):
     """Полный текст и описание стат"""
-    def get(self, request, slug):
-        article = Article.objects.get(url=slug)
-        return render(request, "dictionary/article_detail.html", {
-            "article": article
-        })
+    model = Article
+    slug_field = "url"
+    # def get(self, request, slug):
+    #     article = Article.objects.get(url=slug)
+    #     return render(request, "dictionary/article_detail.html", {
+    #         "article": article
+    #     })
 
 # class AuthorDetailView(View):
 #     """Полный текст и описание статьи"""
