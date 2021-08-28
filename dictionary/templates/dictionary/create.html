@@ -4,8 +4,11 @@
 Создать статью
 {% endblock %}
 
+
+
 {% block content %}
     <h1>Создать статью</h1>
+{% if request.user.is_author %}
     <form method="post">
         {% csrf_token %}
         {{ form.title }}<br>
@@ -20,7 +23,11 @@
       <button type="submit" class="btn btn-success mt-3">Добавить</button>
         <span>{{ error }}</span>
     </form>
+{% else %}
 
+    <h3>У вас не прав</h3>
+
+{% endif %}
 
 {% endblock %}
 
