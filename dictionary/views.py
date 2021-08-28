@@ -1,23 +1,25 @@
 from django.shortcuts import render, redirect
-from django.views.generic import DetailView
+from django.views.generic import DetailView, TemplateView, ListView
 
 from .models import Article, User
 from .forms import ArticleForm
 from django.http import HttpResponse
 from django.views.generic.base import View
+from django.db.models import Q
 
 
-def index(request):
-    articles = Article.objects.all()
-    return render(request, "dictionary/index.html", {'title': 'Главная страница сайта', 'articles': articles})
+# def index(request):
+#     articles = Article.objects.all()
+#     return render(request, "dictionary/index.html", {'title': 'Главная страница сайта', 'articles': articles})
 
-def search(request):
-    articles = Article.objects.filter(keywords__name='要')
-    return render(request, "dictionary/search.html", {'title': 'Результаты поиска', 'articles': articles})
+# def search(request):
+#     articles = Article.objects.filter(keywords__name='要')
+#     return render(request, "dictionary/search.html", {'title': 'Результаты поиска', 'articles': articles})
 
 
 def about(request):
-    return render(request, "dictionary/about.html")
+    articles = Article.objects.all()
+    return render(request, "dictionary/search.html", {'title': 'Главная страница сайта', 'articles': articles})
 
 
 def create(request):
@@ -70,3 +72,18 @@ class AuthorDetailView(DetailView):
 #             "author": author
 #         })
 
+
+class HomePageView(TemplateView):
+    template_name = 'dictionary/index.html'
+
+
+class SearchResultsView(ListView):
+    model = Article
+    template_name = 'dictionary/search.html'
+
+    def get_queryset(self):
+        query = self.request.GET.get('q')
+        object_list = Article.objects.filter(
+            Q(keywords__name=query)
+        )
+        return object_list

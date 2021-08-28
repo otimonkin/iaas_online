@@ -5,18 +5,23 @@
 {% endblock %}
 
 {% block content %}
-    <h1>Главная страница</h1>
-    {% for article in articles %}
+    <h1>База знаний</h1>
 
-        <a href="{{ article.get_absolute_url }}" class="text-decoration-none text-reset">
-            <div class="alert alert-info bg-light text-dark border mt-2" role="alert">
-                <h3>{{ article.title }}</h3>
-            </div>
-        </a>
+<form action="{% url 'search_results' %}" method="get">
+  <input name="q" type="text" placeholder="Введите слово">
+</form>
+
+<!--    {% for article in articles %}-->
+
+<!--        <a href="{{ article.get_absolute_url }}" class="text-decoration-none text-reset">-->
+<!--            <div class="alert alert-info bg-light text-dark border mt-2" role="alert">-->
+<!--                <h3>{{ article.title }}</h3>-->
+<!--            </div>-->
+<!--        </a>-->
 
 
 
 
-    {% endfor %}
+<!--    {% endfor %}-->
 
 {% endblock %}
