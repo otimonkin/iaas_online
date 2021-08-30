@@ -24,12 +24,12 @@
           </ul>
 
           <div class="col-md-3 text-end">
-              {% if user.is_authenticated %}
+              {% if request.user.is_authenticated %}
               <span>{{ user.username }}</span>
               <a href="/accounts/logout/" class="button">Выход</a>
 
               {% else %}
-                <a href="/accounts/login/" class="button">Вход</a>
+                <a href="{% url 'account_login' %}" class="button">Вход</a>
                 <a href="/accounts/signup/" class="button">Регистрация</a>
               {% endif %}
               <button type="button" class="btn btn-outline-primary me-2">Login</button>

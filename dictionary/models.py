@@ -73,7 +73,7 @@ class Article(models.Model):
     keywords = models.ManyToManyField(Keyword, verbose_name="Ключевые слова", related_name="article_keywords")
     grammar = models.ManyToManyField(GrammarTopic, verbose_name="Грамматика", related_name="article_grammar", blank=True)
     lessons = models.ManyToManyField(Lesson, verbose_name="Уроки", related_name="article_lesson", blank=True)
-    authors = models.ManyToManyField(User, verbose_name="Автор", related_name="article_author", blank=True)
+    authors = models.ManyToManyField(User, verbose_name="Автор", related_name="article_author")
 
     def __str__(self):
         return self.title

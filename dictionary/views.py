@@ -27,11 +27,17 @@ def create(request):
     if request.method == "POST":
         form = ArticleForm(request.POST)
         if form.is_valid():
-            form.save()
+            #form = form.save(commit=False)
+            #form.student = request.user
+            #form.assignment_id = pk
+            #form.save()
+
+            article = form.save()
+            article.authors.add(request.user)
             return redirect("index")
         else:
             error = 'Форма была заполнена некорректно'
-            return HttpResponse(form.errors)
+            return HttpResponse(error)
 
     form = ArticleForm()
     context = {
@@ -87,3 +93,8 @@ class SearchResultsView(ListView):
             Q(keywords__name=query)
         )
         return object_list
+
+    def get_context_data(self, *args, **kwargs):
+        context = super().get_context_data(*args, **kwargs)
+        context['q'] = self.request.GET.get('q')
+        return context
