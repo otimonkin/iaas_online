@@ -19,9 +19,13 @@ class Hsk(models.Model):
 class Keyword(models.Model):
     name = models.CharField("Ключевое слово", max_length=100)
     hsk = models.ForeignKey(Hsk, related_name="hsk_level", on_delete=models.CharField)
+    description = models.TextField("Описание", max_length=500, blank=True, null=True)
 
     def __str__(self):
         return self.name
+
+    def get_absolute_url(self):
+        return reverse('keyword_detail', kwargs={"slug": self.name})
 
     class Meta:
         verbose_name = "Ключевое слово"
