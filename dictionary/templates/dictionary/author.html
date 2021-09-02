@@ -1,0 +1,20 @@
+{% extends "dictionary/base.html" %}
+
+{% block title %}
+{{ title }}
+{% endblock %}
+
+{% block content %}
+<h1>{{ user.first_name }} {{ user.last_name }}</h1><br>
+{{ user.description }}<br>
+{{ user.company }}<br>
+{{ user.image }}<br>
+{{ user.email }}<br>
+
+
+{% for el in user.article_author.all %}
+{{ article }}
+{% endfor %}
+
+
+{% endblock %}
