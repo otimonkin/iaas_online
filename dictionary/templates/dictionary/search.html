@@ -1,0 +1,42 @@
+{% extends "dictionary/base.html" %}
+
+{% block title %}
+{{ title }}
+{% endblock %}
+
+
+
+{% block content %}
+
+<form action="{% url 'search_results' %}" method="get">
+  <input name="q" type="text" class="form-control" placeholder="Найти">
+</form>
+
+    <h1>Результат поиска</h1>
+q = {{ q }}<br>
+{% if object_list %}
+Информацию о "{{q}}" можно почитать в следующих статьях:
+
+    <ul>
+      {% for article in object_list %}
+        <li>
+            <a href="{{ article.get_absolute_url }}">
+          {{ article.title }}
+            </a>
+        </li>
+      {% endfor %}
+    </ul>
+{% else %}
+Нет информации. Мы приняли Ваш запрос, напишем что-то в ближайшее время.
+{% endif %}
+<!--    {% for article in articles %}-->
+
+<!--        <a href="{{ article.get_absolute_url }}" class="text-decoration-none text-reset">-->
+<!--            <div class="alert alert-info bg-light text-dark border mt-2" role="alert">-->
+<!--                <h3>{{ article.title }}</h3>-->
+<!--            </div>-->
+<!--        </a>-->
+
+<!--    {% endfor %}-->
+
+{% endblock %}

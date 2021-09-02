@@ -1,0 +1,40 @@
+{% extends "dictionary/base.html" %}
+
+{% block title %}
+{{ title }}
+{% endblock %}
+
+
+
+
+
+{% block content %}
+<h1>{{ article.title }}</h1><br>
+<h5>Автор:</h5>
+{% for author in article.authors.all %}
+<a href="{% url 'author_detail' author.username %}">{{ author }}</a>
+{% endfor %}
+<p>{{ article.message }}</p><br>
+{% if article.keywords.all %}
+<h6>Ключевые слова:</h6>
+{% for keyword in article.keywords.all %}
+<a href="{{ keyword.get_absolute_url }}">{{ keyword }}</a> |
+{% endfor %}
+{% endif %}
+
+{% if article.grammar.all %}
+<h6>Раздел грамматики:</h6>
+{% for el in article.grammar.all %}
+{{ el }}|
+{% endfor %}
+{% endif %}
+
+{% if article.lessons.all %}
+<h6>В каких ученниках найти теорию:</h6>
+{% for el in article.lessons.all %}
+{{ el }} |
+{% endfor %}
+{% endif %}
+
+{% endblock %}
+

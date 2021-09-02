@@ -1,0 +1,56 @@
+{% extends "dictionary/base.html" %}
+
+{% block title %}
+{{ title }}
+{% endblock %}
+
+
+
+
+
+{% block content %}
+<h1>{{ keyword.name }}</h1><br>
+{% if keyword.description %}
+<h5>Описание:</h5>
+{{ keyword.description }}<br>
+{% endif %}
+
+
+{% if article_list %}
+{% for article in article_list %}
+<li>
+    <a href="{{ article.get_absolute_url }}">
+        {{ article }}
+    </a>
+</li>
+
+
+{% endfor %}
+{% else %}
+Информация будет добавлена в ближайшее время. Stay tuned!
+{% endif %}
+
+
+<p>{{ article.message }}</p><br>
+{% if article.keywords.all %}
+<h6>Ключевые слова:</h6>
+{% for el in article.keywords.all %}
+{{ el }}、
+{% endfor %}
+{% endif %}
+
+{% if article.grammar.all %}
+<h6>Раздел грамматики:</h6>
+{% for el in article.grammar.all %}
+{{ el }}|
+{% endfor %}
+{% endif %}
+
+{% if article.lessons.all %}
+<h6>В каких ученниках найти теорию:</h6>
+{% for el in article.lessons.all %}
+{{ el }} |
+{% endfor %}
+{% endif %}
+
+{% endblock %}

@@ -1,0 +1,31 @@
+{% extends "dictionary/base.html" %}
+
+{% block title %}
+Авторы
+{% endblock %}
+
+{% block content %}
+{%  for author in authors %}
+<div class="card mb-3" style="max-width: 540px;">
+  <div class="row g-0">
+    <div class="col-md-4">
+      {% if author.image %}
+      <img src="{{author.image.url}}" class="img-fluid rounded-start" alt="...">
+      {% endif %}
+    </div>
+    <div class="col-md-8">
+      <div class="card-body">
+        <a href="{% url 'author_detail' author.username %}" class="text-decoration-none text-reset">
+          <h5 class="card-title">{{ author }}</h5>
+          <p class="card-text">{{ author.description }}</p>
+          <p class="card-text"><small class="text-muted">Что то еще</small></p>
+        </a>
+
+      </div>
+    </div>
+  </div>
+</div>
+
+{% endfor %}
+
+{% endblock %}
