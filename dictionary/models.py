@@ -78,6 +78,7 @@ class Article(models.Model):
     grammar = models.ManyToManyField(GrammarTopic, verbose_name="Грамматика", related_name="article_grammar", blank=True)
     lessons = models.ManyToManyField(Lesson, verbose_name="Уроки", related_name="article_lesson", blank=True)
     authors = models.ManyToManyField(User, verbose_name="Автор", related_name="article_author")
+    draft = models.BooleanField("Черновик", default=False)
 
     def __str__(self):
         return self.title

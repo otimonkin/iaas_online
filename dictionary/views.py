@@ -59,6 +59,7 @@ def authorview(request):
 
 class ArticleListView(ListView):
     model = Article
+    queryset = Article.objects.filter(draft=False)
 
 
 class ArticleDetailView(DetailView):
@@ -100,7 +101,7 @@ class KeywordDetailView(DetailView):
         # Add in a QuerySet of all the books
         context['article_list'] = Article.objects.filter(Q(keywords__name=self.kwargs['slug'])|
             Q(keywords__name=self.kwargs['slug'])|Q(title__contains=self.kwargs['slug'])|
-            Q(keywords__name__contains=self.kwargs['slug'])
+            Q(keywords__name__contains=self.kwargs['slug']), draft=False
         ).distinct()
         return context
 
@@ -116,7 +117,7 @@ class SearchResultsView(ListView):
     def get_queryset(self):
         query = self.request.GET.get('q')
         object_list = Article.objects.filter(
-            Q(keywords__name=query)|Q(title__contains=query)|Q(keywords__name__contains=query)
+            Q(keywords__name=query)|Q(title__contains=query)|Q(keywords__name__contains=query), draft=False
         ).distinct()
         return object_list
 
